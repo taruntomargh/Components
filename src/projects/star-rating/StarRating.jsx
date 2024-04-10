@@ -20,7 +20,7 @@ const StarRating = () => {
 
   return (
     <>
-      <h1 className="text-2xl text-center">Star Rating</h1>
+      <h1 className="text-2xl text-center bg-green-200">Star Rating</h1>
       <div className="flex justify-center mt-2">
         {array.map((index) => {
           return(

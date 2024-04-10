@@ -1,33 +1,69 @@
 import React, { useState } from "react";
-import datas from "./data";
+import accordion from "./data";
+import Button from "../../components/Button";
 
 const Accordion = () => {
-  const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [enableMultiSelection, setEnableMultiSelection] = useState(false);
+  const [multiSelector, setMultiSelector] = useState([]);
   const [expand, setExpand] = useState(false);
-  const [showAccordion, setShowAccordion] = useState(0);
 
-  function handleClick(index) {
-    setShow(!expand);
-    setExpand(!expand);
-    setShowAccordion(index);
+  function handleSingleSelection(currentId) {
+    setSelected(currentId === selected ? null : currentId);
   }
 
+  function handleMultiSelection(currentId){
+    let cpyMultiSelector = [...multiSelector];
+    let checkIndex = cpyMultiSelector.indexOf(currentId);
+
+    if(checkIndex === -1){
+      cpyMultiSelector.push(currentId);
+    } else{
+      cpyMultiSelector.splice(checkIndex, 1);
+    }
+
+    setMultiSelector(cpyMultiSelector);
+  }
+
+  function handleOpenAll() {
+    setExpand(!expand);
+  }
+
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-2xl text-center bg-lime-200 mb-2">Accordion</h1>
+    <div className="flex flex-col justify-center items-center gap-2">
+      <h1 className="text-2xl text-center bg-green-200 mb-2">Accordion</h1>
+      <div className="flex gap-2">
+        <button onClick={() => setEnableMultiSelection(!enableMultiSelection)} className="text-md text-white bg-blue-800 rounded-md p-2">Enable Multi Selector</button>
+        <div onClick={handleOpenAll}>
+          <Button value={"Open All"} />
+        </div>
+      </div>
       <div className="flex flex-col gap-3 w-96">
-        {datas.map((data) => {
-          return (
-            <div key={data.id} className="flex flex-col gap-1 bg-green-200 rounded-md p-2">
-              <div onClick={() => handleClick(data.id)} className="flex justify-between cursor-pointer items-center">
-                <h3 >{data.title} </h3>
-                <span className="text-xl">+</span>
+        {accordion && accordion.length ? (
+          accordion.map((data) => {
+            return (
+              <div
+                key={data.id}
+                className="flex flex-col gap-1 bg-green-200 rounded-md p-2"
+              >
+                <div
+                  onClick={enableMultiSelection ? () => handleMultiSelection(data.id) : () => handleSingleSelection(data.id)}
+                  className="flex justify-between cursor-pointer items-center"
+                >
+                  <h3>{data.title} </h3>
+                  <span className="text-xl">+</span>
+                </div>
+                {
+                  enableMultiSelection ? multiSelector.indexOf(data.id) !== -1 && <p>{data.text}</p> : selected === data.id && <p>{data.text}</p>
+                }
+                {/* {(selected === data.id || multiSelector.indexOf(data.id) !== -1 || expand) ? <p>{data.text}</p> : null} */}
               </div>
-              {(showAccordion === data.id) ? <p>{data.text}</p> : null}
-              {/* {show ? <p>{data.text}</p> : null} */}
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>No data found</div>
+        )}
       </div>
     </div>
   );
