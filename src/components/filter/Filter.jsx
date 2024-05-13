@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
 
 const Filter = () => {
   const [loading, setLoading] = useState(true);

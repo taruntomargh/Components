@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
 
 const RandomColorGenerator = () => {
   const [randomColor, setRandomColor] = useState(179116);

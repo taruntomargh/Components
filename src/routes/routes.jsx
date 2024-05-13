@@ -41,7 +41,7 @@ import {
   ToolTip,
   TreeView,
   Weather,
-} from "../projects";
+} from "../components";
 import Home from "../pages/Home";
 
 const router = createBrowserRouter([

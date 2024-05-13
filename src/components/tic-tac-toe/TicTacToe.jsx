@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaSquareRootAlt } from "react-icons/fa";
-import Button from "../../components/Button";
+import Button from "../button/Button";
 
 function Square({ value, onClick }) {
   return (
@@ -91,7 +91,7 @@ const TicTacToe = () => {
         <div className="mt-2 flex flex-col gap-2 justify-center items-center">
           <p className="text-xl">{status}</p>
           <div onClick={handleRestart}>
-            <Button value={"Restart"} />
+            <Button value={"Restart"}/>
           </div>
         </div>
       </div>

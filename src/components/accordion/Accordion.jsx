@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import accordion from "./data";
-import Button from "../../components/Button";
+import Button from "../button/Button"
 
 const Accordion = () => {
   const [selected, setSelected] = useState(null);
