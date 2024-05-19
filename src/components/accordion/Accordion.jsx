@@ -32,7 +32,7 @@ const Accordion = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-2">
-      <h1 className="text-2xl text-center bg-green-200 mb-2">Accordion</h1>
+      <h1 className="text-2xl text-center mb-2">Accordion</h1>
       <div className="flex gap-2">
         <button onClick={() => setEnableMultiSelection(!enableMultiSelection)} className="text-md text-white bg-blue-800 rounded-md p-2">Enable Multi Selector</button>
         <div onClick={handleOpenAll}>
